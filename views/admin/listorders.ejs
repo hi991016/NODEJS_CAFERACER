@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+  <title>List Orders</title>
+  <link rel="shortcut icon" href="../favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Red border */
+    hr.new1 {
+      border-top: 4px solid black;
+    }
+  </style>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid rgb(0, 0, 0);
+      padding: 15px;
+      /* color:aliceblue */
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="home">Hi <b><%=session.admin.username%></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="home">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="listproducts">Manage Products <span
+              class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="listproducts">Product List</a></li>
+            <li><a href="addproduct">Add product</a></li>
+          </ul>
+        </li>
+        <li><a href="listorders">Manage Orders</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="./logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <a href="home" class="btn btn-dark" role="button">BACK</a>
+  <p align="center" style="margin-top: 4em">
+    <font size="6" face="Arial"> <b> ORDERED LISTS </b> </font>
+  </p>
+  <hr class="new1" width="25%" align="center" />
+  <hr class="new1" width="15%" align="center" />
+  <br /><br /><br />
+  <table border="1" align="CENTER">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>DateTime</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    <%  for (var item of orders) { %>
+    <tr>
+      <td>
+        <a href="/admin/listorders?id=<%= item._id %>">
+          <%= item._id %>
+        </a>
+      </td>
+      <td><%= item.custName %></td>
+      <td><%= item.custPhone %></td>
+      <td><%= item.custAddress %></td>
+      <td><%= new Date(item.datetime).toLocaleString() %></td>
+      <td><b>$<%= item.total %></b></td>
+      <td><b>
+          <font color="red"><%= item.status %></font>
+        </b></td>
+      <td>
+        <a class="btn btn-dark" href="/admin/updatestatus?id=<%= item._id %>&status=APPROVE">APPROVE</a>
+        ||
+        <a class="btn btn-dark" href="/admin/updatestatus?id=<%= item._id %>&status=CANCEL">CANCEL</a>
+      </td>
+    </tr>
+    <% } %>
+  </table>
+
+  <% if (order) { %>
+  <p align="center" style="margin-top: 5em">
+    <font size="5" face="Arial"> <b> ORDER DETAILS </b></font>
+  </p>
+  <hr class="new1" width="20%" align="center" />
+  <hr class="new1" width="10%" align="center" /> <br />
+  <table border="1" align="center">
+    <tr>
+      <th>ProductID</th>
+      <th>ProductName</th>
+      <th>Category</th>
+      <th>Image</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    <% for (var item of order.items) { %>
+    <tr>
+      <td><%= item.product._id %></td>
+      <td><%= item.product.name %></td>
+      <td><%= item.product.category %></td>
+      <td><img src="data:image/jpg;base64,<%= item.product.image %>" width="140" height="140" /></td>
+      <td>$<%= item.product.price %></td>
+      <td><%= item.quantity %></td>
+    </tr>
+    <% } %>
+  </table>
+  <% } %>
+
+</html>

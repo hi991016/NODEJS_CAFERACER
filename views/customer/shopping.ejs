@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <title>Shopping</title>
+
+  <!-- Styles -->
+  <link href="css/style.css" rel="stylesheet" media="screen">
+  <style>
+    select {
+      color:rgb(22, 22, 22);
+      font-size: 15px; 
+      font-weight: bold; 
+      width: 190px;
+    }
+  </style>
+</head>
+
+<body class="body-full-page">
+
+  <div class="loader">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+
+  <!-- Content CLick Capture-->
+
+  <div class="click-capture"></div>
+
+  <!-- Sidebar Menu-->
+
+  <div class="menu">
+    <span class="close-menu icon-cross2 right-boxed"></span>
+    <div class="menu-lang right-boxed">
+      <a href="#" class="active">Eng</a>
+      <a href="#" onClick="alert('Cafe Racer bản vietsub sẽ sớm ra mắt chịu khó đợi nhé ahihi !!')">Vie</a>
+    </div>
+    <ul class="menu-list right-boxed">
+      <li data-menuanchor="page1">
+        <a href="./aboutus">ABOUT US</a>
+      </li>
+      <li data-menuanchor="page2">
+        <a href="./home">HOME</a>
+      </li>
+      <li data-menuanchor="page3">
+        <a href="./shop">SHOP</a>
+      </li>
+      <li data-menuanchor="page4">
+        <a href="./mycart">CART</a>
+      </li>
+      <li data-menuanchor="page5">
+        <a href="./contactus">CONTACT US</a>
+      </li>
+      <li data-menuanchor="page6">
+        <a href="./admin/login" target="_blank">LOGIN</a>
+      </li>
+
+    </ul>
+    <div class="menu-footer right-boxed">
+      <div class="social-list">
+        <a href="https://twitter.com/" target="_blank" class="icon ion-social-twitter"></a>
+        <a href="https://www.facebook.com/mynameismeoww" target="_blank" class="icon ion-social-facebook"></a>
+        <a href="http://gmail.com/" target="_blank" class="icon ion-social-googleplus"></a>
+        <a href="https://www.instagram.com/hi991016/" target="_blank" class="ion-social-instagram-outline"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+
+  <header class="navbar navbar-2 navbar-white boxed">
+    <div class="navbar-bg"></div>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"
+      aria-expanded="false">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <a class="brand" href="home">
+      <img class="brand-img" alt="" src="images/brand.png">
+      <div class="brand-info">
+        <div class="brand-name">Cafe Racer</div>
+        <div class="brand-text">Ride hard or Stay home</div>
+      </div>
+    </a>
+
+    <div class="social-list hidden-xs">
+      <a href="https://twitter.com/" target="_blank" class="icon ion-social-twitter"></a>
+      <a href="https://www.facebook.com/mynameismeoww" target="_blank" class="icon ion-social-facebook"></a>
+      <a href="http://gmail.com/" target="_blank" class="icon ion-social-googleplus"></a>
+      <a href="https://www.instagram.com/hi991016/" target="_blank" class="ion-social-instagram-outline"></a>
+    </div>
+
+  </header>
+
+  <div class="pagepiling">
+
+
+    <div data-anchor="page1" class="pp-scrollable text-white section section-1">
+      <div class="scroll-wrap">
+        <div class="section-bg" style="background-color:rgb(22, 22, 22);"></div>
+        <div class="scrollable-content">
+          <div class="vertical-centred">
+            <div class="boxed boxed-inner">
+
+              <p align="right" style="margin-right: 7em"><a href="./mycart"> <i class="iconify" data-icon="oi-cart"
+                    data-inline="false" style="font-size: 1em;" color="white"></i>
+                  <font size="4" face="Arial"> My cart
+                </a> have <b><%= (session.mycart) ? session.mycart.length : 0 %></b> items</font>
+              </p>
+              <h2 align="center" style="margin-top: 1em">
+                <font size="6" face="Arial"> SHOP </font>
+              </h2>
+              <hr width="30%" align="center" /> <br />
+              <table align="center">
+                <tr>
+                  <td colspan="<%=nCols%>" align="center">
+                    <select onchange="window.location='./shopping?catname=' + this.value">
+                      <%  for (var cat of cats) { %>
+                      <option value="<%=cat.name%>"
+                        <%= (typeof(catSelected) != 'undefined' && catSelected == cat.name) ? 'selected' : '' %>>
+                        <%=cat.name%>
+                      </option>
+                      <%  } %>
+                    </select>
+                    <br /> <br /> <br />
+                  </td>
+                </tr> 
+
+                <%  for (var r = 0; r < nRows; r++) { %>
+                <tr>
+                  <%  for (var c = 0; c < nCols; c++) {
+                        if (r * nCols + c < products.length) {
+                          var product = products[r * nCols + c];  %>
+                  <td align="center">
+                    <a href="/viewproduct/<%= product._id %>">
+                      <img src="data:image/jpg;base64,<%=product.image%>" width="300" height="300" style="margin-right: 1em"/>
+                    </a><br />
+                    <b><%=product.name%></b><br />
+                    <font size="3.5" face="Arial" color="yellow">$<%=product.price%></font><br /><br />
+                  </td>
+                  <%  } } %>
+                </tr>
+                <% } %>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--end div-->
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/smoothscroll.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.pagepiling.js"></script>
+  <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+  <!-- Scripts -->
+  <script src="js/scripts.js"></script>
+</body>
+
+
+</html>

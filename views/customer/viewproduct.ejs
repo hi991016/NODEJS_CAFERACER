@@ -1,0 +1,258 @@
+<html>
+
+<body>
+	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+	<div class="wrapper">
+
+		<nav>
+			<a href="/shopping">BACK</a>
+		</nav>
+
+		<div class="content">
+			<div class="col-1-2 product-img">
+				<img src="data:image/jpg;base64,<%= product.image %>" width="100%" height="100%"
+					style="margin-right: 8em" />
+			</div>
+
+			<div class="col-1-2 product-info">
+				<h1><%= product.name %></h1>
+				<h1>$<%= product.price%></h1><br />
+				<h2>Category: <%=product.category%></h2>
+				<form action="/add2cart" method="POST">
+					<input type="hidden" name="txtID" value="<%= product._id %>" />
+					<h2>Quantity:</h2> <input type="number" name="txtQuantity" min="1" max="20" style="width: 10.8em"
+						value="1" /><br /><br><br>
+					<button type="submit" class="btn">ADD TO CART</button>
+				</form>
+			</div>
+		</div>
+		<footer>
+			<img src="../apple-touch-icon-114x114.png">
+			<h3>Cafe Racer by Cáo - DEC 15, 2019</h3>
+		</footer>
+
+	</div>
+</body>
+
+</html>
+
+<style>
+	body {
+		font-family: 'Lato', 'Century Gothic', sans-serif;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	ul {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	.wrapper {
+		/*margin-bottom: 100px;*/
+		width: 100%;
+	}
+
+	.breadcrumb {
+		border-top: 1px solid #ddd;
+		clear: both;
+		background-color: #f5f5f5;
+		color: #999;
+		font-family: 'Libre Baskerville', 'Georgia', serif;
+		font-size: 11px;
+		text-align: left;
+	}
+
+	nav {
+		border-top: 1px solid rgb(0, 0, 0);
+		border-bottom: 1px solid rgb(0, 0, 0);
+		margin-bottom: 100px;
+		padding-bottom: 1px;
+		padding-top: 1px;
+		text-align: left;
+		width: 100%;
+	}
+
+	nav a {
+		border: 1px solid rgb(0, 0, 0);
+		background-color: rgb(0, 0, 0);
+		color: rgb(255, 255, 255);
+		display: inline-block;
+		font-size: 10px;
+		letter-spacing: 1.2px;
+		margin: -2px;
+		padding: 12px 40px;
+		text-decoration: none;
+		text-transform: uppercase;
+		-webkit-transition: all 400ms ease;
+		transition: all 400ms ease;
+	}
+
+	nav a:hover {
+		background-color: #444;
+		color: #fff;
+	}
+
+	.content {
+		/*background-color: #ddd;*/
+		margin: 0 auto;
+		margin-bottom: 100px;
+		width: 80%;
+		height: 500px;
+	}
+
+	.col-1-2 {
+		float: left;
+		width: 50%;
+		height: 100%;
+	}
+
+	.product-img {
+		background-color: #f9f9f9;
+		border: 1px dotted #ddd;
+		overflow: hidden;
+	}
+
+	/* .bg{
+	background-image: url('');
+	background-size: cover;
+	background-position: center center;
+	width: 80%;
+	height: 80%;
+	-webkit-transition: transform 200ms ease;
+	transition: transform 600ms ease;
+} */
+
+	.product-img:hover .bg {
+		transform: scale(1.05);
+	}
+
+	h1 {
+		color: rgb(0, 0, 0);
+		font-size: 18px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		margin-bottom: 10px;
+	}
+
+	h2 {
+		color: #888;
+		font-size: 14px;
+		letter-spacing: 2px;
+		margin-bottom: 40px;
+	}
+
+	h3 {
+		color: #bbb;
+		font-size: 10px;
+		letter-spacing: 2px;
+		margin-bottom: 10px;
+		text-transform: uppercase;
+	}
+
+	ul {
+		border-bottom: 1px dotted #ddd;
+		margin-bottom: 35px;
+		padding-bottom: 25px;
+	}
+
+	li {
+		list-style-type: none;
+	}
+
+	li::before {
+		content: "\00BB";
+		margin-right: 10px;
+	}
+
+	p,
+	ul {
+		color: #999;
+		font-family: 'Libre Baskerville', 'Georgia'serif;
+		font-size: 11px;
+		line-height: 2;
+	}
+
+	p {
+		margin-bottom: 20px;
+	}
+
+	.btn {
+		border: 1px solid #ddd;
+		color: #888;
+		display: inline-block;
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 2px;
+		margin-bottom: 25px;
+		padding: 15px 25px;
+		text-decoration: none;
+		text-transform: uppercase;
+		-webkit-transition: all 400ms ease;
+		transition: all 400ms ease;
+	}
+
+	.btn:hover {
+		background-color: #444;
+		color: #fff;
+	}
+
+	h3.share,
+	a.share {
+		display: inline-block;
+		margin-right: 20px;
+	}
+
+	a.share {
+		color: #444;
+	}
+
+	.product-info {
+		padding: 15px 50px 0px 75px;
+	}
+
+	.product-info p a {
+		border-bottom: 1px dotted #999;
+		color: #444;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	footer {
+		background-color: #212121;
+		width: 100%;
+		padding: 20px 10% 10px 10%;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	footer img {
+		display: inline-block;
+		height: 20px;
+		width: auto;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		vertical-align: middle;
+	}
+
+	footer h3 {
+		display: inline-block;
+		height: 20px;
+		margin-bottom: 0px;
+		vertical-align: middle;
+	}
+</style>

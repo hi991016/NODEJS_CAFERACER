@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+  <title>Update products</title>
+  <link rel="shortcut icon" href="../favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Red border */
+    hr.new1 {
+      border-top: 4px solid black;
+    }
+  </style>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid rgb(0, 0, 0);
+      padding: 15px;
+      /* color:aliceblue */
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="home">Hi <b><%=session.admin.username%></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="home">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="listproducts">Manage Products <span
+              class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="listproducts">List Products</a></li>
+            <li><a href="addproduct">Add product</a></li>
+          </ul>
+        </li>
+        <li><a href="listorders">Manage Orders</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="./logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <form action="/admin/updateproduct/<%= product._id %>" method="POST" enctype="multipart/form-data">
+    <a href="/admin/listproducts" class="btn btn-dark" role="button">BACK</a>
+    <p align="center" style="margin-top: 1em">
+      <font size="6" face="Arial"> UPDATE PRODUCT </font>
+    </p>
+    <hr class="new1" width="25%" align="center" />
+    <hr class="new1" width="15%" align="center" /> <br />
+    <table align="center">
+      <tr>
+        <td><b>ID</b></td>
+        <td><input class="form-control" type="text" readonly="true" value="<%= product._id %>"></td>
+      </tr>
+      <tr>
+        <td><b>Name</b></td>
+        <td><input class="form-control" name="txtName" type="text" value="<%= product.name %>"></td>
+      </tr>
+      <tr>
+        <td><b>Price</b></td>
+        <td><input class="form-control" name="txtPrice" type="text" value="<%= product.price %>"></td>
+      </tr>
+      <tr>
+        <td><b>Category</b></td>
+        <td><select value="<%= product.category %>" name="cmbCategory">
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Helmets">Helmets</option>
+            <option value="Backpacks">Backpacks</option>
+            <option value="Bandanas">Bandanas</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Image</b></td>
+        <td><input type="file" name="fileImage"/></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="UPDATE" /> </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>
